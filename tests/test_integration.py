@@ -1,6 +1,8 @@
 import pytest
 from pulumi import automation as auto
 
+# Integration tests: Überprüfen Sie die Beziehungen zwischen den Ressourcen.
+
 @pytest.fixture(scope="module")
 def pulumi_stack():
     project_name = "pulumi-hello-world"

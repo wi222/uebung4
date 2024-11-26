@@ -2,6 +2,8 @@ import requests
 import pytest
 from pulumi import automation as auto
 
+# End-to-end tests: Stellen Sie sicher, dass der gesamte Stack korrekt bereitgestellt wird.
+
 @pytest.fixture(scope="module")
 def pulumi_stack():
     project_name = "pulumi-hello-world"  

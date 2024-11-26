@@ -1,6 +1,8 @@
 import pytest
 from pulumi import automation as auto
 
+# Unit tests: Testen Sie die Konfigurationen einzelner Ressourcen.
+
 @pytest.fixture(scope="module")
 def pulumi_stack():
     project_name = "pulumi-hello-world"
