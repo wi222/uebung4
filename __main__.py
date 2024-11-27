@@ -4,7 +4,7 @@ from pulumi_azure_native import resources, storage, web, insights
 from pulumi import FileAsset
 
 # Erstellen einer Ressourcengruppe
-resource_group = resources.ResourceGroup("uebung4-resourcegroup", location="westindia")
+resource_group = resources.ResourceGroup("uebung4-resourcegroup", location="switzerlandnorth")
 
 # Erstellen eines Storage-Accounts
 storage_account = storage.StorageAccount("storageaccount",
@@ -43,8 +43,8 @@ app_service_plan = web.AppServicePlan("serviceplan",
     kind="Linux",
     reserved=True,
     sku=web.SkuDescriptionArgs(
-        tier="Free",
-        name="F1"
+        tier="Basic",
+        name="B1"
     )
 )
 
@@ -57,6 +57,18 @@ app_insights = insights.Component("appinsights",
     ingestion_mode="ApplicationInsights"
 )
 
-
+# Erstellen einer Web-App
+web_app = web.WebApp("webapp",
+    resource_group_name=resource_group.name,
+    location=resource_group.location,
+    server_farm_id=app_service_plan.id,
+    site_config=web.SiteConfigArgs(
+        app_settings=[
+            web.NameValuePairArgs(name="WEBSITE_RUN_FROM_PACKAGE", value=blob_url),
+            web.NameValuePairArgs(name="APPINSIGHTS_INSTRUMENTATIONKEY", value=app_insights.instrumentation_key),
+        ],
+        linux_fx_version="PYTHON|3.11",
+    )
+)
 # Outputs exportieren
 pulumi.export("web_app_url", web_app.default_host_name)
