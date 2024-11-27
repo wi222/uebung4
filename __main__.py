@@ -44,7 +44,7 @@ app_service_plan = web.AppServicePlan("serviceplan",
     reserved=True,
     sku=web.SkuDescriptionArgs(
         tier="Free",
-        name="B1"
+        name="F1"
     )
 )
 
