@@ -43,7 +43,7 @@ app_service_plan = web.AppServicePlan("serviceplan",
     kind="Linux",
     reserved=True,
     sku=web.SkuDescriptionArgs(
-        tier="Basic",
+        tier="Free",
         name="B1"
     )
 )
@@ -72,3 +72,12 @@ web_app = web.WebApp("webapp",
 )
 # Outputs exportieren
 pulumi.export("web_app_url", web_app.default_host_name)
+pulumi.export("blob_container_name", blob_container.name)
+pulumi.export("web_app_name", web_app.name)
+pulumi.export("storage_account_sku", storage_account.sku.name)
+pulumi.export("storage_account_name", storage_account.name)
+pulumi.export("storage_account_kind", storage_account.kind)
+pulumi.export("app_service_plan_name", app_service_plan.name)
+pulumi.export("app_service_plan_sku_tier", app_service_plan.sku.tier)
+pulumi.export("app_service_plan_kind", app_service_plan.kind)
+pulumi.export("web_app_linux_fx_version", web_app.site_config.linux_fx_version)
